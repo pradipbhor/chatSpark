@@ -1,0 +1,84 @@
+{
+  "info": {
+    "_postman_id": "59bfdd92-54dc-4a72-ac48-c0d7ab10e77e",
+    "name": "ChatSpark API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "30673453"
+  },
+  "item": [
+    {
+      "name": "call end",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"call_id\": \"call_003\",\n    \"caller_id\": \"user_003\",\n    \"creator_id\": \"creator_042\",\n    \"duration_seconds\": 240,\n    \"started_at\": \"2025-02-26T21:00:00Z\"\n  }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:9090/call/end",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "call",
+            "end"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "leaderboard",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:9090/leaderboard",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "leaderboard"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "stats",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:9090/creator/creator_009/stats",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "9090",
+          "path": [
+            "creator",
+            "creator_009",
+            "stats"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
