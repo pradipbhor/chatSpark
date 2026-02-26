@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+
+  # ── MySQL Database ─────────────────────────────────────────
+  db:
+    image: mysql:8.0
+    container_name: chatspark_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: chatspark
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql          # persist data across restarts
+      - ./schema.sql:/docker-entrypoint-initdb.d/01_schema.sql   # runs first
+      - ./seed.sql:/docker-entrypoint-initdb.d/02_seed.sql       # runs second
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Node.js API ────────────────────────────────────────────
+  api:
+    build: .
+    container_name: chatspark_api
+    restart: always
+    ports:
+      - "9090:9090"
+    environment:
+      DB_HOST: db               # use service name, not localhost
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_NAME: chatspark
+      PORT: 9090
+    depends_on:
+      db:
+        condition: service_healthy  # wait for MySQL to be ready before starting API
+
+volumes:
+  db_data:

@@ -31,11 +31,24 @@ server.js             # Entry point only
 
 ## Setup
 
+## Requirements
+
+- [Docker](https://www.docker.com/products/docker-desktop)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+---
+
 ### 1. Clone & Install
+
+#developement
 bash
 git clone https://github.com/pradipbhor/chatSpark.git
 cd chatSpark
 npm install
+
+
+#production
+docker-compose up --build
 
 
 ### 2. Environment Variables
@@ -53,15 +66,22 @@ PORT=3000
 
 
 ### 3. Database Setup
+
+#developement:
 bash
 mysql -u root -p < schema.sql
 mysql -u root -p < seed.sql
 
+#first command is for create a schema 
+#second command is for create a dummy data 
+
+#for testing use dummy data excute this command 
+docker exec -i chatspark_db mysql -u root -proot chatspark < seed.sql
+
 
 ### 4. Run
 bash
-npm run dev     # development (nodemon)
-npm start       # production
+npm start       # development
 
 
 ---
