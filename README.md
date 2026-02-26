@@ -55,6 +55,7 @@ PORT=3000
 ### 3. Database Setup
 bash
 mysql -u root -p < schema.sql
+mysql -u root -p < seed.sql
 
 
 ### 4. Run
@@ -71,7 +72,7 @@ npm start       # production
 Top 10 creators by call minutes — last 7 days.
 
 bash
-curl http://localhost:3000/leaderboard
+curl http://localhost:9090/leaderboard
 
 
 *Response:*
@@ -99,7 +100,7 @@ json
 All-time stats for a creator.
 
 bash
-curl http://localhost:3000/creator/creator_042/stats
+curl http://localhost:9090/creator/creator_001/stats
 
 
 *Response:*
@@ -107,7 +108,7 @@ json
 {
   "success": true,
   "data": {
-    "creator": { "id": "creator_042", "display_name": "Priya", "tier": "gold", "status": "online" },
+    "creator": { "id": "creator_001", "display_name": "Priya", "tier": "gold", "status": "online" },
     "stats": {
       "total_calls": 28,
       "total_seconds": 33600,
@@ -124,12 +125,12 @@ json
 Log a completed call.
 
 bash
-curl -X POST http://localhost:3000/call/end \
+curl -X POST http://localhost:9090/call/end \
   -H "Content-Type: application/json" \
   -d '{
     "call_id": "abc123",
     "caller_id": "user_001",
-    "creator_id": "creator_042",
+    "creator_id": "creator_001",
     "duration_seconds": 240,
     "started_at": "2025-02-26T21:00:00Z"
   }'
